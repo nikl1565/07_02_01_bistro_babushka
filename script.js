@@ -39,14 +39,12 @@ function start() {
 
             json.feed.entry.forEach(dish => {
 
-                console.log(`${dishCategory} + ${dish.gsx$kategori.$t}`);
-
                 if (dishCategory == dish.gsx$kategori.$t || dishCategory == "all") {
 
                     let templateClone = dishTemplate.cloneNode(true).content;
                     let dishCategoryContainer = document.querySelector(`.dish-${dishCategory}`);
-                    console.log(dishCategoryContainer);
-                    console.log(dish.gsx$kategori);
+                    //                    console.log(dishCategoryContainer);
+                    //                    console.log(dish.gsx$kategori);
 
                     templateClone.querySelector(".dish-image").src = `/img/large/${dish.gsx$billede.$t}.jpg`;
                     templateClone.querySelector(".dish-name").textContent = `Nr. ${dish.gsx$id.$t} ${dish.gsx$navn.$t}`;
@@ -93,22 +91,54 @@ function start() {
 
     function addEventlistenersToButtons() {
         document.querySelectorAll(".filter").forEach(button => {
-            button.addEventListener("click", filterDishes);
+            console.log("button");
+            button.addEventListener("click", showDishCategory);
         });
     }
 
-    function filterDishes() {
+    function showDishCategory() {
+        console.log("click!");
+
         filter = this.dataset.kategori;
-        document.querySelector(".sub-headline-dish-category").textContent = this.textContent;
-        document.querySelectorAll(".filter").forEach((button) => {
-            button.classList.remove("active");
-        });
-
-        this.classList.add("valgt");
-
-        show(json);
         console.log(filter);
+
+        let dishInner = document.querySelector(".dish-inner");
+        let dishSlideAmount = 0;
+
+        if (filter == "all") {
+            dishSlideAmount = 0;
+        } else if (filter == "forretter") {
+            dishSlideAmount = 100;
+        } else if (filter == "hovedretter") {
+            dishSlideAmount = 200;
+        } else if (filter == "desserter") {
+            dishSlideAmount = 300;
+        } else if (filter == "sideorders") {
+            dishSlideAmount = 400;
+        } else {
+            dishSlideAmount = 500;
+        }
+
+        dishInner.style.transform = `translateX(-${dishSlideAmount}vw)`;
+        console.log(dishSlideAmount);
     }
+
+
+
+
+    //
+    //    function filterDishes() {
+    //        filter = this.dataset.kategori;
+    //        document.querySelector(".sub-headline-dish-category").textContent = this.textContent;
+    //        document.querySelectorAll(".filter").forEach((button) => {
+    //            button.classList.remove("active");
+    //        });
+    //
+    //        this.classList.add("valgt");
+    //
+    //        show(json);
+    //        console.log(filter);
+    //    }
 
     function firstLetterUppercase(text) {
         let textFirstLetter = text.charAt(0).toUpperCase();

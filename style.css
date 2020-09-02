@@ -26,12 +26,18 @@ img {
 }
 
 .dish-container {
-    padding: 30px;
-    max-width: 1350px;
     margin: 0 auto;
-    display: flex;
-    overflow-x: scroll;
+    position: relative;
+    overflow: hidden;
+}
 
+.dish-inner {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 600%;
+    will-change: transform;
+    transition: transform 0.3s ease-in-out;
 }
 
 .dish-all,
@@ -40,14 +46,14 @@ img {
 .dish-desserter,
 .dish-sideorders,
 .dish-drikkevarer {
-    width: 100%;
-    flex: 0 0 100%;
+    flex: 0 0 100vw;
     padding: 30px;
     /*
      display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     grid-gap: 30px;
-*/
+    */
+
 }
 
 .dish {
