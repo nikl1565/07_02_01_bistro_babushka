@@ -3,21 +3,48 @@
     margin: 0;
 }
 
-/*
-
 :root {
-    definer variable
-    google css variable
+    --grey: #e6e6e6;
 }
-*/
+
+h1 {
+    font-family: 'Russo One', sans-serif;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+}
 
 img {
     max-width: 100%;
     display: block;
 }
 
+.header {
+    padding: 60px;
+    background-color: var(--grey);
+}
+
+.dish-container {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-gap: 30px;
+    max-width: 1350px;
+    margin: 0 auto;
+}
+
 .dish {
     cursor: pointer;
+}
+
+.dish-name {
+    font-family: 'Russo One', sans-serif;
+}
+
+.dish-image {
+    border-radius: 4px;
+    margin-bottom: 10px;
 }
 
 .pop-up-dish-container {

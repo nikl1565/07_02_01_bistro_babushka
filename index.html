@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bistro Babushka</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Russo+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1 class="headline">Bistro Babushka</h1>
+    <header class="header">
+        <h1 class="headline">Bistro Babushka</h1>
 
-    <h2 class="sub-headline">Menu: <span class="sub-headline-dish-category">Alle retter</span></h2>
-    <header>
+        <h2 class="sub-headline">Menu: <span class="sub-headline-dish-category">Alle retter</span></h2>
+
         <button class="filter" data-kategori="all">Alle retter</button>
         <button class="filter" data-kategori="forretter">Forretter</button>
         <button class="filter" data-kategori="hovedretter">Hovedretter</button>
@@ -20,8 +22,36 @@
         <button class="filter" data-kategori="sideorders">Tilbehør</button>
         <button class="filter" data-kategori="drikkevarer">Drikkevarer</button>
     </header>
+    <main>
+        <section class="dish-container">
+            <div class="dish-all"></div>
+            <div class="dish-starters"></div>
+            <div class="dish-main-dish"></div>
+            <div class="dish-desserts"></div>
+            <div class="dish-sideorders"></div>
+            <div class="dish-drinks"></div>
+        </section>
 
-    <section class="dish-container"></section>
+        <section class="pop-up-dish-container">
+            <article class="pop-up-dish">
+                <button class="pop-up-close-button">X</button>
+                <p class="pop-up-dish-category"></p>
+                <h3 class="pop-up-dish-name"></h3>
+                <img class="pop-up-dish-image" src="" alt="">
+                <p class="pop-up-dish-description"></p>
+                <p class="pop-up-dish-price"></p>
+                <p class="pop-up-dish-origin"></p>
+            </article>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-column"></div>
+        <div class="footer-column"></div>
+        <div class="footer-column"></div>
+        <div class="footer-column"></div>
+    </footer>
 
     <template>
         <article class="dish">
@@ -32,18 +62,5 @@
         </article>
     </template>
 
-    <section class="pop-up-dish-container">
-        <article class="pop-up-dish">
-            <button class="pop-up-close-button">X</button>
-            <p class="pop-up-dish-category"></p>
-            <h3 class="pop-up-dish-name"></h3>
-            <img class="pop-up-dish-image" src="" alt="">
-            <p class="pop-up-dish-description"></p>
-            <p class="pop-up-dish-price"></p>
-            <p class="pop-up-dish-origin"></p>
-        </article>
-    </section>
-
-    <footer></footer>
     <script src="script.js"></script>
 </body></html>

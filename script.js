@@ -13,12 +13,6 @@ function start() {
 
     let filter = "all";
 
-    function firstLetterUppercase(text) {
-        let textFirstLetter = text.charAt(0).toUpperCase();
-        return text = textFirstLetter + text.slice(1);
-    }
-
-
     async function fetchData() {
         const response = await fetch(googleSheetLink);
         const jsonData = await response.json();
@@ -36,7 +30,7 @@ function start() {
                 console.log(dish);
                 let templateClone = dishTemplate.cloneNode(true).content;
 
-                templateClone.querySelector(".dish-image").src = `/img/small/${dish.gsx$billede.$t}-sm.jpg`;
+                templateClone.querySelector(".dish-image").src = `/img/large/${dish.gsx$billede.$t}.jpg`;
                 templateClone.querySelector(".dish-name").textContent = `Nr. ${dish.gsx$id.$t} ${dish.gsx$navn.$t}`;
                 templateClone.querySelector(".dish-description").textContent = dish.gsx$kort.$t;
                 templateClone.querySelector(".dish-price").textContent += `${dish.gsx$pris.$t} kr`;
@@ -91,6 +85,11 @@ function start() {
 
         show(json);
         console.log(filter);
+    }
+
+    function firstLetterUppercase(text) {
+        let textFirstLetter = text.charAt(0).toUpperCase();
+        return text = textFirstLetter + text.slice(1);
     }
 
     fetchData();
