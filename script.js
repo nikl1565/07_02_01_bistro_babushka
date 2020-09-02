@@ -4,11 +4,22 @@ window.addEventListener("DOMContentLoaded", start);
 function start() {
     console.log("Siden er loaded!");
 
-
-    const dishContainer = document.querySelector(".dish-container");
     const dishTemplate = document.querySelector("template");
+
+    const dishCategories = [
+        "all",
+        "forretter",
+        "hovedretter",
+        "desserter",
+        "sideorders",
+        "drikkevarer"
+    ];
+
+
     const googleSheetLink = "https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json";
+
     const popUpDishContainer = document.querySelector(".pop-up-dish-container");
+
     let json;
 
     let filter = "all";
@@ -23,23 +34,35 @@ function start() {
     }
 
     function show(json) {
-        dishContainer.innerHTML = "";
 
-        json.feed.entry.forEach(dish => {
-            if (filter == "all" || filter == dish.gsx$kategori.$t) {
-                console.log(dish);
-                let templateClone = dishTemplate.cloneNode(true).content;
+        dishCategories.forEach(dishCategory => {
 
-                templateClone.querySelector(".dish-image").src = `/img/large/${dish.gsx$billede.$t}.jpg`;
-                templateClone.querySelector(".dish-name").textContent = `Nr. ${dish.gsx$id.$t} ${dish.gsx$navn.$t}`;
-                templateClone.querySelector(".dish-description").textContent = dish.gsx$kort.$t;
-                templateClone.querySelector(".dish-price").textContent += `${dish.gsx$pris.$t} kr`;
+            json.feed.entry.forEach(dish => {
 
-                templateClone.querySelector(".dish").addEventListener("click", () => showPopUp(dish));
+                console.log(`${dishCategory} + ${dish.gsx$kategori.$t}`);
 
-                dishContainer.appendChild(templateClone);
-            }
+                if (dishCategory == dish.gsx$kategori.$t || dishCategory == "all") {
+
+                    let templateClone = dishTemplate.cloneNode(true).content;
+                    let dishCategoryContainer = document.querySelector(`.dish-${dishCategory}`);
+                    console.log(dishCategoryContainer);
+                    console.log(dish.gsx$kategori);
+
+                    templateClone.querySelector(".dish-image").src = `/img/large/${dish.gsx$billede.$t}.jpg`;
+                    templateClone.querySelector(".dish-name").textContent = `Nr. ${dish.gsx$id.$t} ${dish.gsx$navn.$t}`;
+                    templateClone.querySelector(".dish-description").textContent = dish.gsx$kort.$t;
+                    templateClone.querySelector(".dish-price").textContent += `${dish.gsx$pris.$t} kr`;
+
+                    templateClone.querySelector(".dish").addEventListener("click", () => showPopUp(dish));
+
+
+                    dishCategoryContainer.appendChild(templateClone);
+                }
+            });
+
         });
+
+
     }
 
     function showPopUp(dish) {

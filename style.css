@@ -27,11 +27,27 @@ img {
 
 .dish-container {
     padding: 30px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    grid-gap: 30px;
     max-width: 1350px;
     margin: 0 auto;
+    display: flex;
+    overflow-x: scroll;
+
+}
+
+.dish-all,
+.dish-forretter,
+.dish-hovedretter,
+.dish-desserter,
+.dish-sideorders,
+.dish-drikkevarer {
+    width: 100%;
+    flex: 0 0 100%;
+    padding: 30px;
+    /*
+     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-gap: 30px;
+*/
 }
 
 .dish {
