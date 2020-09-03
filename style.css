@@ -20,6 +20,11 @@ img {
     display: block;
 }
 
+button.filter.active {
+    background-color: blue;
+    color: #fff;
+}
+
 .header {
     padding: 60px;
     background-color: var(--grey);
@@ -29,6 +34,7 @@ img {
     margin: 0 auto;
     position: relative;
     overflow: hidden;
+    max-width: 1350px;
 }
 
 .dish-inner {
@@ -46,14 +52,22 @@ img {
 .dish-desserter,
 .dish-sideorders,
 .dish-drikkevarer {
-    flex: 0 0 100vw;
     padding: 30px;
-    /*
-     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    grid-gap: 30px;
-    */
+    width: 100%;
+}
 
+.dish-category-headline {
+    text-align: center;
+    font-size: 48px;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 30px;
+}
+
+.dish-content {
+    flex: 0 0 100vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 30px;
 }
 
 .dish {

@@ -15,6 +15,36 @@ function start() {
         "drikkevarer"
     ];
 
+    let windowWidth = window.innerWidth;
+    window.addEventListener("resize", () => {
+        windowWidth = window.innerWidth;
+        updateSliderSize();
+    });
+
+    function updateSliderSize() {
+        windowWidth = window.innerWidth;
+        console.log(filter);
+
+        let dishInner = document.querySelector(".dish-inner");
+        let dishInnerHeight = dishInner.offsetWidth / 6;
+        let dishSlideAmount = 0;
+
+        if (filter == "all") {
+            dishSlideAmount = 0;
+        } else if (filter == "forretter") {
+            dishSlideAmount = dishInnerHeight * 1;
+        } else if (filter == "hovedretter") {
+            dishSlideAmount = dishInnerHeight * 2;
+        } else if (filter == "desserter") {
+            dishSlideAmount = dishInnerHeight * 3;
+        } else if (filter == "sideorders") {
+            dishSlideAmount = dishInnerHeight * 4;
+        } else {
+            dishSlideAmount = dishInnerHeight * 5;
+        }
+        console.log(dishSlideAmount);
+        dishInner.style.transform = `translateX(-${dishSlideAmount}px)`;
+    }
 
     const googleSheetLink = "https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json";
 
@@ -28,7 +58,6 @@ function start() {
         const response = await fetch(googleSheetLink);
         const jsonData = await response.json();
         json = jsonData;
-        console.log(json);
         show(jsonData);
         addEventlistenersToButtons();
     }
@@ -42,7 +71,7 @@ function start() {
                 if (dishCategory == dish.gsx$kategori.$t || dishCategory == "all") {
 
                     let templateClone = dishTemplate.cloneNode(true).content;
-                    let dishCategoryContainer = document.querySelector(`.dish-${dishCategory}`);
+                    let dishCategoryContainer = document.querySelector(`.dish-${dishCategory} .dish-content`);
                     //                    console.log(dishCategoryContainer);
                     //                    console.log(dish.gsx$kategori);
 
@@ -54,12 +83,12 @@ function start() {
                     templateClone.querySelector(".dish").addEventListener("click", () => showPopUp(dish));
 
 
+
                     dishCategoryContainer.appendChild(templateClone);
                 }
             });
 
         });
-
 
     }
 
@@ -99,29 +128,38 @@ function start() {
     function showDishCategory() {
         console.log("click!");
 
+        document.querySelectorAll(".filter").forEach((button) => {
+            button.classList.remove("active");
+        });
+
+        this.classList.add("active");
+
+        windowWidth = window.innerWidth;
+
         filter = this.dataset.kategori;
         console.log(filter);
 
         let dishInner = document.querySelector(".dish-inner");
+        let dishInnerHeight = dishInner.offsetWidth / 6;
         let dishSlideAmount = 0;
 
         if (filter == "all") {
             dishSlideAmount = 0;
         } else if (filter == "forretter") {
-            dishSlideAmount = 100;
+            dishSlideAmount = dishInnerHeight * 1;
         } else if (filter == "hovedretter") {
-            dishSlideAmount = 200;
+            dishSlideAmount = dishInnerHeight * 2;
         } else if (filter == "desserter") {
-            dishSlideAmount = 300;
+            dishSlideAmount = dishInnerHeight * 3;
         } else if (filter == "sideorders") {
-            dishSlideAmount = 400;
+            dishSlideAmount = dishInnerHeight * 4;
         } else {
-            dishSlideAmount = 500;
+            dishSlideAmount = dishInnerHeight * 5;
         }
-
-        dishInner.style.transform = `translateX(-${dishSlideAmount}vw)`;
         console.log(dishSlideAmount);
+        dishInner.style.transform = `translateX(-${dishSlideAmount}px)`;
     }
+
 
 
 
