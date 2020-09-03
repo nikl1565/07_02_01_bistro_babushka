@@ -2,7 +2,6 @@ window.addEventListener("DOMContentLoaded", start);
 
 
 function start() {
-    console.log("Siden er loaded!");
 
     const dishTemplate = document.querySelector("template");
 
@@ -22,8 +21,6 @@ function start() {
     });
 
     function updateSliderSize() {
-        windowWidth = window.innerWidth;
-        console.log(filter);
 
         let dishInner = document.querySelector(".dish-inner");
         let dishInnerHeight = dishInner.offsetWidth / 6;
@@ -42,8 +39,13 @@ function start() {
         } else {
             dishSlideAmount = dishInnerHeight * 5;
         }
-        console.log(dishSlideAmount);
+        dishInner.classList.remove("transition");
         dishInner.style.transform = `translateX(-${dishSlideAmount}px)`;
+        setTimeout(function() {
+            dishInner.classList.add("transition");
+        },
+        300);
+
     }
 
     const googleSheetLink = "https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json";
@@ -72,8 +74,6 @@ function start() {
 
                     let templateClone = dishTemplate.cloneNode(true).content;
                     let dishCategoryContainer = document.querySelector(`.dish-${dishCategory} .dish-content`);
-                    //                    console.log(dishCategoryContainer);
-                    //                    console.log(dish.gsx$kategori);
 
                     templateClone.querySelector(".dish-image").src = `/img/large/${dish.gsx$billede.$t}.jpg`;
                     templateClone.querySelector(".dish-name").textContent = `Nr. ${dish.gsx$id.$t} ${dish.gsx$navn.$t}`;
@@ -109,7 +109,6 @@ function start() {
     popUpDishContainer.addEventListener("click", () => popUpClick(event));
 
     function popUpClick(event) {
-        console.log(event.target);
         let clickedElement = event.target;
         if (clickedElement.classList.contains("pop-up-dish-container")) {
             popUpDishContainer.style.display = "none";
@@ -120,24 +119,29 @@ function start() {
 
     function addEventlistenersToButtons() {
         document.querySelectorAll(".filter").forEach(button => {
-            console.log("button");
             button.addEventListener("click", showDishCategory);
         });
     }
 
     function showDishCategory() {
-        console.log("click!");
 
         document.querySelectorAll(".filter").forEach((button) => {
-            button.classList.remove("active");
+            button.classList.remove("is-active");
         });
 
-        this.classList.add("active");
+        this.classList.add("is-active");
 
         windowWidth = window.innerWidth;
 
         filter = this.dataset.kategori;
-        console.log(filter);
+
+        document.querySelectorAll(".dish-inner > div").forEach((category) => {
+            category.classList.remove("is-active");
+        });
+
+        let filterCategory = document.querySelector(`.dish-${filter}`);
+
+        filterCategory.classList.add("is-active");
 
         let dishInner = document.querySelector(".dish-inner");
         let dishInnerHeight = dishInner.offsetWidth / 6;
@@ -156,27 +160,8 @@ function start() {
         } else {
             dishSlideAmount = dishInnerHeight * 5;
         }
-        console.log(dishSlideAmount);
         dishInner.style.transform = `translateX(-${dishSlideAmount}px)`;
     }
-
-
-
-
-
-    //
-    //    function filterDishes() {
-    //        filter = this.dataset.kategori;
-    //        document.querySelector(".sub-headline-dish-category").textContent = this.textContent;
-    //        document.querySelectorAll(".filter").forEach((button) => {
-    //            button.classList.remove("active");
-    //        });
-    //
-    //        this.classList.add("valgt");
-    //
-    //        show(json);
-    //        console.log(filter);
-    //    }
 
     function firstLetterUppercase(text) {
         let textFirstLetter = text.charAt(0).toUpperCase();

@@ -12,7 +12,7 @@
 <body>
     <header class="header">
         <h1 class="headline">Bistro Babushka</h1>
-        <button class="filter" data-kategori="all">Alle retter</button>
+        <button class="filter is-active" data-kategori="all">Alle retter</button>
         <button class="filter" data-kategori="forretter">Forretter</button>
         <button class="filter" data-kategori="hovedretter">Hovedretter</button>
         <button class="filter" data-kategori="desserter">Desserter</button>
@@ -21,28 +21,28 @@
     </header>
     <main>
         <section class="dish-container">
-            <div class="dish-inner">
-                <div class="dish-all">
+            <div class="dish-inner transition">
+                <div class="dish-category dish-all is-active">
                     <h3 class="dish-category-headline">Alle retter</h3>
                     <div class="dish-content"></div>
                 </div>
-                <div class="dish-forretter">
+                <div class="dish-category dish-forretter">
                     <h3 class="dish-category-headline">Forretter</h3>
                <div class="dish-content"></div>
                 </div>
-                <div class="dish-hovedretter">
+                <div class="dish-category dish-hovedretter">
                     <h3 class="dish-category-headline">Hovedretter</h3>
                <div class="dish-content"></div>
                 </div>
-                <div class="dish-desserter">
+                <div class="dish-category dish-desserter">
                     <h3 class="dish-category-headline">Desserter</h3>
                <div class="dish-content"></div>
                 </div>
-                <div class="dish-sideorders">
+                <div class="dish-category dish-sideorders">
                     <h3 class="dish-category-headline">Tilbehør</h3>
                <div class="dish-content"></div>
                 </div>
-                <div class="dish-drikkevarer">
+                <div class="dish-category dish-drikkevarer">
                     <h3 class="dish-category-headline">Drikkevarer</h3>
                <div class="dish-content"></div>
                 </div>
@@ -72,7 +72,9 @@
 
     <template>
         <article class="dish">
-            <img class="dish-image" src="" alt="">
+            <div class="dish-image-container">
+                <img class="dish-image" src="" alt="">
+            </div>
             <h3 class="dish-name"></h3>
             <p class="dish-description"></p>
             <p class="dish-price">Pris: </p>

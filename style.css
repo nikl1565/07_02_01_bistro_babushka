@@ -20,13 +20,13 @@ img {
     display: block;
 }
 
-button.filter.active {
+button.filter.is-active {
     background-color: blue;
     color: #fff;
 }
 
 .header {
-    padding: 60px;
+    padding: 30px;
     background-color: var(--grey);
 }
 
@@ -42,6 +42,9 @@ button.filter.active {
     flex-direction: row;
     flex-wrap: nowrap;
     width: 600%;
+}
+
+.dish-inner.transition {
     will-change: transform;
     transition: transform 0.3s ease-in-out;
 }
@@ -56,6 +59,14 @@ button.filter.active {
     width: 100%;
 }
 
+.dish-category {
+    height: 0;
+}
+
+.dish-category.is-active {
+    height: auto;
+}
+
 .dish-category-headline {
     text-align: center;
     font-size: 48px;
@@ -66,8 +77,14 @@ button.filter.active {
 .dish-content {
     flex: 0 0 100vw;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 30px;
+    grid-template-columns: repeat(auto-fill, 1fr);
+}
+
+@media only screen and (min-width: 360px) {
+    .dish-content {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
 }
 
 .dish {
@@ -78,9 +95,18 @@ button.filter.active {
     font-family: 'Russo One', sans-serif;
 }
 
+.dish-image-container {
+    margin-bottom: 10px;
+    padding-bottom: 56.25%;
+    height: 0;
+    position: relative;
+    overflow: hidden;
+}
+
 .dish-image {
     border-radius: 4px;
-    margin-bottom: 10px;
+    position: absolute;
+    object-fit: cover;
 }
 
 .pop-up-dish-container {
